@@ -1,0 +1,27 @@
+# **Android development _basics_**
+
+![android](https://img.shields.io/badge/Android-2A9C53?style=for-the-badge&logo=android&logoColor=white) ![kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)
+
+> _This repository is my routine from zero to mastering Android development. It covers the essential
+> building blocks, simple yet powerful!_
+
+## Tech stack
+
+- Language: [Kotlin](https://github.com/ducsiukap/kotlinpp.git).
+- IDE: [Android Studio](https://developer.android.com/studio).
+
+---
+
+## Index
+
+---
+
+## About me
+
+**[LinkedIn](https://www.linkedin.com/in/duc-pham-b19b66351/)  
+[Mail](mailto:ducpv.contact@gmail.com)  
+[Instagram](https://www.instagram.com/vduczz/)**
+
+---
+
+_#vduczz_
