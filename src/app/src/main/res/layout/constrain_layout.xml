@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+/* ========================================
+* CONSTRAIN layout
+======================================== */
+
+Các view bên trong được tính toán vị trí thông qua các constrain
+Yêu cầu với mỗi View con:
+- ít nhất 1 vertical constrain
+- ít nhất 1 horizontal constrain
+
+Cú pháp khai báo constrain:
+    app:layout_constraint{src_edge}_to{dst_edge}Of="{target}"
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <!--
+    - GuideLine : reference line
+        + không render UI
+        + tồn tại để làm điểm neo cho View
+    -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal_guideline_25p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal_guideline_75p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal_guideline_50p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <!--
+    ___________________________
+    (1) width/height = 0dp -> MATCH_CONSTRAIN
+            -> chiếm full space theo constrain
+        Yêu cầu:
+            + với width=0dp -> cần có cả constrain top + bottom
+            + với Height=0dp -> cần có cả constrain start + end
+    ___________________________
+    (2) khi có đủ cả 2 constrain đối lập: top+bottom or start+end
+        -> bias = 0.5 (default)
+        -> có thể chỉnh bias trong phạm vi 0.0 - 1.0 đẩy view lệch về 1 phía
+    -->
+    <!-- Title -->
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="8dp"
+        android:text="LOGIN"
+        android:textAlignment="center"
+        android:textSize="24sp"
+
+        app:layout_constraintBottom_toBottomOf="@id/horizontal_guideline_25p"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--
+    (1) Barrier: đường kẻ động
+            -> khác với Guideline, có vị trí cố định
+            -> Barrier có vị trí thay đổi theo kích thước 1 nhóm View
+         Thuộc tính:
+            + barrierDirection: hướng tính toán barrier
+            + constrain_referenced_ids: các View con
+    (2) Chain: khi các view con móc nối theo kiểu
+            A <-> B <-> C ...
+        -> Sử dụng chainStyle ở phần tử đầu chain
+        để chỉ định kiểu phân bố chain: layout_constraintHorizontal_chainStyle
+            + "spread" (default): phân bố đều, cách đều 2 đầu
+            + "spread_inside": phân bố đều, bỏ khoảng cách 2 đầu
+            + "packed": dồn sát các view vào nhau, sử dụng bias để đẩy về 1 phía
+    -->
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="lbl_password,lbl_username" />
+
+    <TextView
+        android:id="@+id/lbl_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+
+
+        android:text="Username"
+        app:layout_constraintBottom_toBottomOf="@id/edt_username"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/edt_username" />
+
+    <!-- Chain voi edt_password
+        chainStyle: "packed"
+        bias: 1
+    -->
+    <EditText
+        android:id="@+id/edt_username"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+
+        app:layout_constraintBottom_toTopOf="@id/edt_password"
+        app:layout_constraintLeft_toLeftOf="@id/barrier_input"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/horizontal_guideline_25p"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/lbl_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+
+        android:text="Password"
+        app:layout_constraintBottom_toBottomOf="@id/edt_password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/edt_password" />
+
+    <EditText
+        android:id="@+id/edt_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+
+        app:layout_constraintBottom_toTopOf="@id/horizontal_guideline_50p"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/barrier_input"
+        app:layout_constraintTop_toTopOf="@id/edt_username" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:padding="8dp"
+
+        android:text="Login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="@id/horizontal_guideline_50p" />
+</androidx.constraintlayout.widget.ConstraintLayout>

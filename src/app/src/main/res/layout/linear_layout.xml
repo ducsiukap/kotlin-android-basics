@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- // LinearLayout
+- android:orientation: "vertical" / "horizontal" (default)
+        -> layout orientation
+- android:gravity: "start"/"end",
+    "center"/"center_vertical"/"center_horizontal", ...
+        -> áp dụng cho ViewGroup (layout)
+        -> kiểm soát căn chỉnh View con bên trong
+- android:weightSum: tổng weight
+        -> Dùng weightSum khi bạn muốn chỉ một số View dùng weight
+        -> còn phần còn lại bỏ trống
+-->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--
+    /* ========================================
+    * HORIZONTAL LinearLayout + center_vertical gravity
+    ======================================== */
+    -->
+    <LinearLayout
+        android:id="@+id/linear_layout_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/red"
+
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View 1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View 2" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View 3" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View 4" />
+    </LinearLayout>
+
+
+    <!--
+    /* ========================================
+    * VERTICAL LinearLayout + center_horizontal gravity
+    ======================================== */
+    -->
+    <LinearLayout
+        android:id="@+id/linear_layout_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:background="@color/green"
+
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linear_layout_horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View 1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View 2" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View 3" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View 4" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View 5" />
+    </LinearLayout>
+
+    <!--
+    /* ========================================
+    * LinearLayout + gravity + weightSum:
+        + orientation:horizontal
+        + gravity:center
+        + weightSum: 4.5
+    ======================================== */
+   -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/red"
+
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="4.5"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linear_layout_vertical">
+
+        <!-- View inside LinearLayout
+        _____________________________
+        - android:layout_weight: cho phép view con PHÂN CHIA KHÔNG GIAN CÒN LẠI theo tỉ lệ
+                + B1: Do tất cả View không có layout_weight -> tính không gian đã dùng
+                    -> total_space - total_using_space = remaining_space
+                + B2: Tính tổng Weight
+                    -> space_per_weight = remaining_space / total_weight
+                + B3: Tính kích thước View con tương ứng:
+                    -> view_space = weight * space_per_weight
+            *Note:
+                + (1) nếu sử dụng layout_weight cho View con
+                    thì nên set width/height tương ứng với orientation của layout là 0dp
+                    để tối ưu hiệu năng, tránh DOUBLE MEASUREMENT
+                + (2) layout_weight KHÔNG nhất thiết là số nguyên
+                    -> nếu layout có weightSum -> cần total_weight <= weightSum
+        _____________________________
+        - android:layout_gravity: — áp dụng cho View con,
+                -> kiểm soát cách chính View đó tự căn chỉnh trong View cha.
+        -->
+
+        <!--
+        + layout_width: wrap_content
+        + layout_gravity: "top"
+        -->
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="top"
+
+            android:layout_margin="2dp"
+            android:padding="8dp"
+            android:text="View 1" />
+
+        <!--
+        + layout_width: 50dp
+        -->
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:padding="8dp"
+            android:text="View 2" />
+
+        <!--
+        + layout_width: 0dp
+        + layout_weight: 1
+        + layout_gravity: "bottom"
+        -->
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:text="View 3" />
+
+        <!--
+        + layout_width: 0dp
+        + layout_weight: 2
+        -->
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="2"
+            android:text="View 4" />
+
+        <!-- weightSum = 4.5 -> dư 1.5 space -->
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
