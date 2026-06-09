@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp">
+
+    <!-- EditText props:
+    + :inputType -> kiểm soát: loại bàn phím + cách xử lý input
+        - "text" -> normal text
+        - "textEmailAddress" / "phone" -> email / phone
+        - "textPassword" / "textVisiblePassword" / "numberPassword" (PIN)
+        - "number" / "numberDecimal"
+        - "textMultiLine"
+        - "textCapSentences" / "textCapWords"
+        - "textUri"
+        - "datetime"
+            -> kết hợp inputType="type1|type2|...|typeN"
+    + :imeOptions -> kiểm soát nút action
+        - "actionNext" -> nút Next: focus tới edt tiếp theo
+        - "actionDone" -> nút Done: ẩn bàn phím
+        - "actionSearch" / "actionSend" / "actionGo" -> nút Search / Send / Go
+    + :maxLength -> giới hạn ký tự
+    + :sellectAllOnFocus -> chọn toàn bộ text khi focus
+    + :digits="0123456789" -> chỉ cho phép nhập các ký tự trong chuỗi này
+    + :autofillHints
+    + :enable / :focusable
+    + :hint -> placeholder
+    + :background="@null" -> loại bỏ đường line bên dưới
+    -->
+
+    <EditText
+        android:id="@+id/edt_text"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:autofillHints="Some text..."
+
+        android:background="@null"
+        android:hint="Enter text"
+        android:imeOptions="actionNext"
+        android:inputType="text"
+        android:maxLines="1" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+
+        android:background="@null"
+        android:hint="Enter multiple line text..."
+        android:imeOptions="actionNext"
+        android:inputType="textMultiLine"
+        android:maxLines="3"
+        android:minLines="3" />
+</LinearLayout>

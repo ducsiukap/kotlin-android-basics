@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <!-- Text content
+        + :text -> content
+        + :hint -> hint / placeholder : thường dùng cho EditText
+        + :textSize -> ..sp
+        + :textColor -> @color/...
+        + :textStyle -> bold / italic / bold|italic
+        + :fontFamily -> set font from res/font
+        + :letterSpacing / :lineSpacingMultiplier -> khoảng cách ký tự / dòng
+        + :textAllCaps -> in hoa toàn bộ chữ
+    -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/cardview_dark_background"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+
+            android:text="Text 1- normal text"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Text 2 - 24sp bold|italic"
+            android:textColor="@color/white"
+
+            android:textSize="24sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0.2"
+            android:lineSpacingMultiplier="1.5"
+            android:text="Text 3 letter-spacing=0.2 line-spacing-miltiplier=1.3"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Giới hạn & xử lý text dài
+        + :maxLines / :minLines
+        + :ellipsize -> "start" / "middle" / "end" / "marquee"
+            -> cắt text với "..."
+
+        + :gravity -> căn chỉnh text
+     -->
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+
+        android:ellipsize="end"
+        android:gravity="center_horizontal"
+        android:maxLines="2"
+        android:minLines="1"
+        android:text="TextView maxlines-2 minlines-1 ellipsize-end gravity-center_horizontal"
+
+        android:textSize="24sp" />
+    />
+
+    <!-- Drawable (icon) bên cạnh text
+        + :drawableLeft="@drawable/ic_email"
+        + :drawableRight, :drawableTop, :drawableBottom
+
+        + :drawablePadding: ..dp -> khoảng cách icon - text
+    -->
+</LinearLayout>
