@@ -13,7 +13,7 @@
 
 1. [Introduction](./docs/s1_introductions/readme.md)
 2. [XML layout & View system](./docs/s2_xml_layout_and_view_system/readme.md)
-
+3. [ViewBinding](./docs/s3_view_binding/readme.md)
 
 ---
 
