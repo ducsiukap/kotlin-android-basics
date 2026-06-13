@@ -15,6 +15,7 @@
 2. [XML layout & View system](./docs/s2_xml_layout_and_view_system/readme.md)
 3. [ViewBinding](./docs/s3_view_binding/readme.md)
 4. [**Activity** & lifecycle](./docs/s4_activities/readme.md)
+5. [**Intent** & navigation](./docs/s5_intent/readme.md)
 
 ---
 

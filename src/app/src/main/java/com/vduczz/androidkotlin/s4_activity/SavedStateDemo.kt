@@ -1,4 +1,4 @@
-package com.vduczz.androidkotlin.s3_activity
+package com.vduczz.androidkotlin.s4_activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
