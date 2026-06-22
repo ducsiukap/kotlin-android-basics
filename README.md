@@ -17,6 +17,7 @@
 4. [**Activity** & lifecycle](./docs/s4_activities/readme.md)
 5. [**Intent** & navigation](./docs/s5_intent/readme.md)
 6. [**Fragment**s](./docs/s6_fragments/readme.md)
+7. [**Service**](./docs/s7_services/readme.md)
 
 ---
 
