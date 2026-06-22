@@ -18,6 +18,7 @@
 5. [**Intent** & navigation](./docs/s5_intent/readme.md)
 6. [**Fragment**s](./docs/s6_fragments/readme.md)
 7. [**Service**](./docs/s7_services/readme.md)
+8. [**BroadcastReceiver**](./docs/s8_broadcast_receiver/readme.md)
 
 ---
 
