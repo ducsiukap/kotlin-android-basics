@@ -20,6 +20,7 @@
 7. [**Service**](./docs/s7_services/readme.md)
 8. [**BroadcastReceiver**](./docs/s8_broadcast_receiver/readme.md)
 9. [**ContentProvider**](./docs/s9_content_provider/readme.md)
+10. [Storage & Persistance](./docs/s10_storage/readme.md)
 
 ---
 
