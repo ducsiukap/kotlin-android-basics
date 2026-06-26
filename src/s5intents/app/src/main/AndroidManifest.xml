@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.S5intents">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Every Activity has to be declared in Manifest
+
+        + launchMode:
+            - standard (default): create a new instance per each call activity
+                -> multiple instances can be created
+
+            - singleTop: DOES NOT CREATE a new instance
+                            if activity is at the TOP of current task
+                         else, similar to standard
+
+            - singleTask: only one instance of activity can be existed,
+                -> instance is the root of individual task
+
+            - singleInstance: similar to singleTask,
+                    but no other activities can be started in the same task
+                -> new activities will be started in a new task
+        -->
+        <activity
+            android:name=".explicitintent.SourceActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".explicitintent.DestinationActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".implicitintent.SourceActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!--
+        + exported: true -> activity có thể được mở từ hệ thống / app khác
+            -> có thể xử lý implicit intent
+        -->
+        <activity
+            android:name=".implicitintent.DestinationActivity"
+            android:exported="true">
+
+            <!-- intent-filter: lọc các intent mà activity có khả năng xử lý
+                 + action       -> action từ intent, có thể custom và cần thống nhất giữa 2 phía
+                 + category     -> nhóm / bối cảnh mà component được phép xử lý intent
+                 + data         -> dữ liệu mà component có khả năng xử lý (mimetype, scheme, host, path, port)
+            -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".activityresult.SourceActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".activityresult.DestinationActivity"
+            android:exported="false"/>
+    </application>
+
+</manifest>
