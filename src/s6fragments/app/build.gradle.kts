@@ -1,5 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
+
+    // safeargs
+    alias(libs.plugins.navigation.safeargs)
 }
 
 android {
@@ -9,7 +12,7 @@ android {
     defaultConfig {
         applicationId = "com.vduczz.s6fragments"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
@@ -42,4 +45,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+
+    //navigation
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+
 }
