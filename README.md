@@ -7,6 +7,8 @@
 - Language: [Kotlin](https://github.com/ducsiukap/kotlinpp.git).
 - IDE: [Android Studio](https://developer.android.com/studio).
 
+> _Starter android project template: [Android ViewSystem project starter template](https://github.com/ducsiukap/android-project-starter-xml)_
+
 ---
 
 ## Index
@@ -21,6 +23,7 @@
 8. [**BroadcastReceiver**](./docs/s8_broadcast_receiver/readme.md)
 9. [**ContentProvider**](./docs/s9_content_provider/readme.md)
 10. [Storage & Persistance](./docs/s10_storage/readme.md)
+11. [MVVM architecture](./docs/s11_mvvm/readme.md)
 
 ---
 
