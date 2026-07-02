@@ -4,7 +4,7 @@
 
 ### **1. MVVM architecture**
 
-1. [MVC, MVP & MVVP](./mvvm/mvc_mvp_mvvm.md)
+1. [MVC, MVP & MVVM](./mvvm/mvc_mvp_mvvm.md)
 2. [UDF](./mvvm/udf.md) - Undirectional Data Flow
 
 ### **2. `ViewModel`**
