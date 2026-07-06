@@ -3,6 +3,7 @@
 ## **Contents**
 
 1. [RecyclerView](./recyclerview/readme.md)
+2. [Dialog](./dialog/readme.md)
 
 ---
 
