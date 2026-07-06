@@ -24,6 +24,7 @@
 9. [**ContentProvider**](./docs/s9_content_provider/readme.md)
 10. [Storage & Persistance](./docs/s10_storage/readme.md)
 11. [MVVM architecture](./docs/s11_mvvm/readme.md)
+12. [Advanced UI components / UX](./docs/s12_advanced_android_components/readme.md)
 
 ---
 
