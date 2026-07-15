@@ -99,7 +99,7 @@ Nếu chia `Service` theo cách nó **hoạt động**, **giao tiếp**, cách n
 
 ### 4.3. Kết hợp các **phân loại** trên theo từng **mục đích** và **behavior** khác nhau
 
-| **Lifecycle** / **Priority** | **Foreground Service**                                                                                | **Background Service**                                                                             |
+| **Lifecycle** / **Priority** | **Background Service**                                                                                | **Foreground Service**                                                                             |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | **Started Service**          | **Sync** nhanh, không cần Notification, **chạy ngắn**<br/>(_hiếm dùng do bị giới hạn nặng từ API 26_) | **Music Player**, **GPS Tracking**, **Large download**, ...<br/>_PHỔ BIẾN NHẤT trong thực tế_      |
 | **Bound Service**            | `Activity` bind để **query data tạm thời**, không cần chạy khi Activity đóng                          | **Ít gặp**, thường dùng **Bound Service** không cần **Foreground** vì chỉ sống khi có client bind. |
