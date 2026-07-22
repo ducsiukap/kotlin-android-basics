@@ -127,3 +127,38 @@ Chi tiết:
    - `CATEGORY_LAUNCHER` = hiển thị icon app trong launcher (danh sách app)
 
    > _Thiếu một trong hai → app không có icon launcher_
+
+---
+
+## 3. Note
+
+### 3.1. **Thứ tự** khởi chạy của các component
+
+Khi `AndroidManifest.xml` chứa nhiều thành phần, bao gồm **Content Provider**, **Broadcast Receiver**, **Activity** và **Service**, thì **thành phần nào KHỞI CHẠY TRƯỚC**?
+
+Thành phần chạy **ĐẦU TIÊN** chính là `ContentProvider`.<br>
+Thứ tự chi tiết khi ứng dụng **cold start** (khởi chạy từ đầu):
+
+1. `Application.attachBaseContext()`: giai đoạn **chuẩn bị `Context`**
+
+   Phương thức này **chạy đầu tiên khi OS vừa tạo xong process** cho ứng dụng. <br>
+   Lúc này **`Application` chưa hoàn toàn khởi tạo xong `onCreate()`**.
+
+2. `ContentProvider.onCreate()`
+
+   `ContentProvider.onCreate()` chạy **TRƯỚC** cả `Application.onCreate()`. OS sẽ tự gọi `onCreate()` của tất cả `ContentProvider` được khai báo trong **Manifest**
+
+   > Đây là **lí do** vì sao các thư viện như `Firebase`, `WorkManager`, ... có thể **tự khởi động** mà không cần gọi từ `MainActivity`.<br>
+   > _Chúng chứa `ContentProvider` bên trong để đạt được điều đó._
+
+3. `Application.onCreate()`: **khởi tạo ứng dụng** chính thức
+
+   Sau khi các `ContentProvider` khởi tạo xong, hàm `Application.onCreate()` mới chính thức được thực thi để **khởi tạo ứng dụng**.
+
+4. `Activity`/`Service`/`BroadcastReceiver`: **triggers**
+
+   Thành phần nào **kích hoạt việc mở app** sẽ được chạy tiếp theo, ví dụ:
+   - Mở từ **icon launcher** -> `Activity` chạy
+   - App được **khởi động ngầm** bởi một `Intent` -> `Service`/`BroadcastReceiver` sẽ chạy tuỳ kịch bản.
+
+   > **Note**: `Service`/`BroadcastReceiver` không phải luôn chạy vĩnh viễn. OS áp dụng cơ chế **chỉ active khi có task** và **kill ngay khi thực hiện xong** (_tức là dựng lên mỗi khi cần và kill ngay sau khi dùng xong ở lần đó_)

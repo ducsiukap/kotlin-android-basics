@@ -2,6 +2,8 @@
 
 ## 1. `res/` directory - **Resources System**
 
+### 1.1. `res/` directory
+
 Trong Android, phần **giao diện** và các **dữ liệu tĩnh** thường **không viết cứng trực tiếp trong code** Java/Kotlin.<br/>
 Thư mục `res/` chứa toàn bộ **tài nguyên tĩnh** của app.
 
@@ -47,6 +49,19 @@ Tại sao phải tách `res/` thay vì **hardcode**?
   > _eg. `res/values/strings.xml` (default), `res/values-es/strings.xml` (Spanish), `res/values-vi/strings.xml` (Vietnamese)_
 
   Android **tự chọn ngôn ngữ phù hợp theo `locale`** của thiết bị. Đây là cơ chế **resource qualifier**.
+
+### 1.2. **Resource qualifier**
+
+**Resource Qualifier** là **hậu tố thêm vào tên thư mục** — Android OS **tự động chọn thư mục phù hợp nhất** với cấu hình thiết bị hiện tại:
+
+- `values/`: mặc định (fallback)
+- `values-vi`/`values-en/`: cấu hình tiếng Việt/Anh
+- `values-night/`: dark mode
+- `values-v26/`: API 26+
+- `values-sw600dp/`: screen >= 600dp (tablet)
+- `values-land/`: landscape orientation
+
+**Ưu tiên chọn**: Android chọn thư mục **khớp nhất** với cấu hình thiết bị, **fallback** về `values/` mặc định nếu **không tìm thấy**
 
 ---
 
@@ -103,3 +118,74 @@ android:layout_width="@dimen/button_width"
   - `description`: mô tả ngắn gọn về resource (app_name, purple_500...)
 
 eg: `activity_main.xml`, `btn_login`, `ic_user_profile`, `color_primary`, ..
+
+---
+
+## 3. Truy cập **Resource** qua `Context` — Cách phổ biến nhất
+
+Sử dụng `context.getString`/`getDrawable`/`get...` để truy cập resource tương ứng:
+
+```kotlin
+// String
+val greeting = context.getString(R.string.greeting)
+
+// String với argument
+// strings.xml: <string name="welcome">Xin chào, %1$s!</string>
+val welcome = context.getString(R.string.welcome, "Nguyễn Văn A")
+// → "Xin chào, Nguyễn Văn A!"
+
+// String array
+// arrays.xml: <string-array name="cities">...</string-array>
+val cities = context.resources.getStringArray(R.array.cities)
+
+// Color — PHẢI dùng ContextCompat, không dùng resources.getColor() trực tiếp
+val primaryColor = ContextCompat.getColor(context, R.color.primary)
+// Lý do: resources.getColor() deprecated từ API 23, không handle theme đúng
+
+// Drawable
+val icon = ContextCompat.getDrawable(context, R.drawable.ic_home)
+
+// Dimension — trả về Float (pixel)
+val margin = context.resources.getDimension(R.dimen.margin_standard)
+// Chuyển sang dp:
+val marginDp = context.resources.getDimensionPixelSize(R.dimen.margin_standard)
+// → trả về Int (pixel đã rounded)
+
+// Boolean
+val isTablet = context.resources.getBoolean(R.bool.is_tablet)
+```
+
+trong `Activity`/`Fragment`, có thể dùng trực tiếp `get...` hoặc `requireContext().get...` (_vì bản thân `Acitivity` đã là context_).
+
+hoặc trong `ViewModel`, **truyền context từ ngoài** hoặc sử kế thừa `AndroidViewModel` (có sẵn `ApplicationContext`)
+
+```kotlin
+// ViewModel thường — KHÔNG có Context
+class HomeViewModel : ViewModel() {
+
+    // SAI — không truy cập Resources ở đây
+    // val title = context.getString(R.string.title)  ← không có context
+
+    // ĐÚNG — truyền string đã resolve từ bên ngoài vào
+    private val _title = MutableLiveData<String>()
+    val title: LiveData<String> = _title
+
+    fun loadData(titleString: String) {
+        _title.value = titleString
+    }
+}
+
+// Trong Fragment:
+viewModel.loadData(getString(R.string.home_title))
+
+// ── HOẶC dùng AndroidViewModel ──────────────────────────────
+
+class HomeViewModel(application: Application) : AndroidViewModel(application) {
+
+    // AndroidViewModel có Application Context → truy cập được Resources
+    val title = application.getString(R.string.home_title)
+
+    // Hoặc:
+    val primaryColor = ContextCompat.getColor(application, R.color.primary)
+}
+```

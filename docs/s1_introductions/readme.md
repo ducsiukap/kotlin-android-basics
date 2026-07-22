@@ -12,8 +12,13 @@
    - **Android app project**
      - [Project structure](./project_structure.md)
      - [`AndroidManifest.xml` contract](./manifest.md)
-     - [res/ & `R` class](./resources.md)
      - [Gradle build system](./gradle.md)
+3. **Application** & **Context**
+   - [`Context`](./context.md)
+   - [`Application` class](./application_class.md)
+   - [Resources, `res/` & `R` class](./resources.md)
+   - [`Configuration` class](./configuration.md)
+   - [`Process` & Application lifecycle](./process.md)
 
 ---
 

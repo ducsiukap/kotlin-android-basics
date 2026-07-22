@@ -13,7 +13,7 @@
 
 ## Index
 
-1. [Introduction](./docs/s1_introductions/readme.md)
+1. [Introduction](./docs/s1_introductions/readme.md): 4 core component, Manifest, Context, Process, ... 
 2. [XML layout & View system](./docs/s2_xml_layout_and_view_system/readme.md)
 3. [ViewBinding](./docs/s3_view_binding/readme.md)
 4. [**Activity** & lifecycle](./docs/s4_activities/readme.md)
@@ -25,6 +25,7 @@
 10. [Storage & Persistance](./docs/s10_storage/readme.md)
 11. [MVVM architecture](./docs/s11_mvvm/readme.md)
 12. [Advanced UI components / UX](./docs/s12_advanced_android_components/readme.md)
+13. [Notification](./docs/s13_notification/readme.md)
 
 ---
 
